@@ -731,6 +731,158 @@ def page_404():
     write("404.html", h)
 
 
+
+# ---------------------------------------------------------------- landing page (Google Ads)
+LP_SUBJECT = "NEW QUOTE REQUEST - Outdoor Kitchen (Google Ads)"
+
+
+def lp_form():
+    return f"""<form class="quote-form" action="https://api.web3forms.com/submit" method="POST" data-thanks="lp-thanks.html">
+<input type="hidden" name="access_key" value="{ACCESS_KEY}">
+<input type="hidden" name="subject" value="{LP_SUBJECT}">
+<input type="hidden" name="from_name" value="{BIZ} Landing (Google Ads)">
+<input type="hidden" name="type_of_work" value="Outdoor kitchen">
+<input type="hidden" name="source_page" value="">
+<input type="hidden" name="gclid" value="" data-qs="gclid">
+<input type="hidden" name="utm_source" value="" data-qs="utm_source">
+<input type="hidden" name="utm_medium" value="" data-qs="utm_medium">
+<input type="hidden" name="utm_campaign" value="" data-qs="utm_campaign">
+<input type="hidden" name="utm_term" value="" data-qs="utm_term">
+<input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+<div class="field"><label for="lp-name">Your name</label><input id="lp-name" name="name" type="text" autocomplete="name" required></div>
+<div class="field"><label for="lp-phone">Phone number</label><input id="lp-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required></div>
+<div class="field"><label for="lp-msg">Project details <span class="opt">(optional)</span></label><textarea id="lp-msg" name="message" placeholder="Brick or stone? Where is the patio?"></textarea></div>
+<button class="btn btn-brick" type="submit">Request my quote</button>
+<p class="form-status" role="status" aria-live="polite"></p>
+<p class="form-alt">Prefer to talk? Call <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>.</p>
+</form>"""
+
+
+def lp_header():
+    return f"""<header class="site-header lp-header">
+<div class="wrap header-in">
+<div class="brand">{MARK}<span>{BIZ}<small>Brick and stone masonry, Katy, TX</small></span></div>
+<a class="btn btn-brick header-phone" href="tel:{PHONE_TEL}">Call {PHONE_DISPLAY}</a>
+</div>
+</header>
+<main id="main">
+"""
+
+
+def lp_footer(quote_href="#quote"):
+    return f"""</main>
+<footer class="site-footer lp-footer">
+<div class="wrap lp-footer-in">
+<p><strong>{BIZ}</strong></p>
+<p><a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></p>
+<p><a href="mailto:{EMAIL}">{EMAIL}</a></p>
+<p>Hours: {HOURS}</p>
+</div>
+<div class="wrap copyright">&copy; <span id="year">2026</span> {BIZ}.</div>
+</footer>
+<div class="callbar">
+<a class="btn btn-brick" href="tel:{PHONE_TEL}">Call now</a>
+<a class="btn btn-outline" href="{quote_href}">Request a quote</a>
+</div>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
+"""
+
+
+def page_lp_kitchens():
+    h = head("Outdoor Kitchens in Katy, TX | " + BIZ,
+             "Javier builds outdoor kitchens in brick or natural stone in Katy, TX, from the base to the countertop and built-in grill. Request a quote or call (713) 392-8790.",
+             og_key="kitchen_pool", noindex=True)
+    h = h.replace("</head>", "<!-- GOOGLE ADS: paste the global site tag (gtag.js) here -->\n</head>")
+    h += lp_header()
+    h += f"""<section class="lp-hero">
+<div class="wrap lp-grid">
+<div class="lp-copy">
+<h1>Outdoor Kitchens in Katy, TX</h1>
+<p class="lead">Javier builds your outdoor kitchen in brick or natural stone, from the base to the countertop and the built-in grill and cabinets. One builder, start to finish.</p>
+<div class="btn-row"><a class="btn btn-brick" href="tel:{PHONE_TEL}">Call {PHONE_DISPLAY}</a><a class="btn btn-outline lp-jump" href="#quote">Request a quote</a></div>
+<p class="hero-note">Hours: {HOURS}</p>
+<div class="lp-photo">{img("kitchen_pool", sizes="(max-width: 820px) 100vw, 640px", eager=True)}</div>
+</div>
+<div class="quote-panel lp-form" id="quote">
+<h2>Request your quote</h2>
+<p class="sub">Leave your name and number. Javier will get back to you.</p>
+{lp_form()}
+</div>
+</div>
+</section>
+
+<section class="section white">
+<div class="wrap">
+<div class="feature">
+<div class="feature-media media-landscape">{img("kitchen_stone", sizes="(max-width: 820px) 100vw, 560px", pos="50% 45%")}</div>
+<div>
+<h2>What is included</h2>
+<p>Javier handles the whole build, so you deal with one person instead of coordinating several crews.</p>
+{checks(["Brick or limestone base built to your layout", "Countertop set and finished", "Built-in grill installed", "Cabinet doors installed", "Space for a built-in fridge and storage"])}
+<a class="btn btn-brick" href="tel:{PHONE_TEL}">Call {PHONE_DISPLAY}</a>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="wrap">
+<div class="section-head"><h2>How it works</h2></div>
+<ol class="steps">
+<li><strong>Tell Javier about your space</strong><p>Call or send the form with your idea and where you live.</p></li>
+<li><strong>Choose the layout and materials</strong><p>Decide on brick or stone and the look you want.</p></li>
+<li><strong>Javier builds it</strong><p>Structure, countertop and built-in installation, handled by one builder.</p></li>
+</ol>
+</div>
+</section>
+
+<section class="section alt">
+<div class="wrap">
+<div class="section-head"><h2>More of Javier's stonework</h2><p>The same care goes into fireplaces, columns and garden borders.</p></div>
+<div class="trio">
+{img("fire_ext", sizes="(max-width: 560px) 50vw, 360px", pos="50% 30%")}
+{img("col_brick", sizes="(max-width: 560px) 50vw, 360px", pos="50% 30%")}
+{img("planter_palm", sizes="(max-width: 560px) 50vw, 360px")}
+</div>
+<p style="margin-top:1.6rem">Serving Katy, Cypress, Tomball and Houston, TX.</p>
+</div>
+</section>
+
+<section class="closing">
+<div class="wrap closing-in">
+<div>
+<h2>Ready to plan your outdoor kitchen?</h2>
+<p>Call Javier, or send your details and he will get back to you.</p>
+</div>
+<div>
+<a class="big-phone" href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>
+<a class="btn btn-brick lp-jump" href="#quote">Request a quote</a>
+</div>
+</div>
+</section>
+"""
+    h += lp_footer()
+    write("lp-outdoor-kitchens.html", h)
+
+
+def page_lp_thanks():
+    h = head("Request sent | " + BIZ, "Thanks, your request was sent to Javier Masonry Service.", noindex=True)
+    h = h.replace("</head>", "<!-- GOOGLE ADS: paste the conversion event snippet here (fires on this page) -->\n</head>")
+    h += lp_header()
+    h += f"""<section class="thanks">
+<div class="wrap">
+<h1>Thanks, your request was sent</h1>
+<p>Javier will get back to you. If it is urgent, call <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>.</p>
+<div class="btn-row"><a class="btn btn-brick" href="tel:{PHONE_TEL}">Call {PHONE_DISPLAY}</a></div>
+</div>
+</section>
+"""
+    h += lp_footer("tel:" + PHONE_TEL)
+    write("lp-thanks.html", h)
+
+
 if __name__ == "__main__":
     page_index()
     page_kitchens()
@@ -742,4 +894,6 @@ if __name__ == "__main__":
         page_city(f, d)
     page_thanks()
     page_404()
+    page_lp_kitchens()
+    page_lp_thanks()
     print("OK")

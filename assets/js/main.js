@@ -24,6 +24,8 @@
     var status = form.querySelector('.form-status');
     var btn = form.querySelector('button[type="submit"]');
     var original = btn ? btn.textContent : '';
+    var qs = new URLSearchParams(location.search);
+    form.querySelectorAll('input[data-qs]').forEach(function (i) { i.value = qs.get(i.getAttribute('data-qs')) || ''; });
     var src = form.querySelector('input[name="source_page"]');
     if (src) { src.value = location.pathname.split('/').pop() || 'index.html'; }
 
@@ -43,7 +45,7 @@
         .then(function (res) { return res.json().then(function (j) { return { ok: res.ok, json: j }; }); })
         .then(function (r) {
           if (r.ok && r.json && r.json.success) {
-            window.location.href = 'thanks.html';
+            window.location.href = form.getAttribute('data-thanks') || 'thanks.html';
           } else {
             throw new Error((r.json && r.json.message) || 'Request failed');
           }

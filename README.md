@@ -15,6 +15,12 @@ To switch to Javier's email, create a new access key with his address and replac
 ## Photos
 Hosted on Cloudinary (`kat6qihq`), delivered with `f_auto,q_auto` and a width limit. Folders are not part of the URLs.
 
+## Landing page for Google Ads
+- `lp-outdoor-kitchens.html` (noindex, no menu, one service) and `lp-thanks.html` (conversion page).
+- Form subject: `NEW QUOTE REQUEST - Outdoor Kitchen (Google Ads)`. It also captures `gclid` and `utm_*` from the ad URL.
+- Paste the Google Ads global site tag where the HTML comment says so in both files, and the conversion event in `lp-thanks.html`.
+- Suggested final URL for the ad: `/lp-outdoor-kitchens.html`. Add more kitchen photos in `tools/build.py` (`page_lp_kitchens`) when Javier sends them.
+
 ## Regenerating the pages
 `python3 tools/build.py` rewrites all HTML files from the data in that script (phone, email, hours, photos, copy).
 
